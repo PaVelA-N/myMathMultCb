@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+	<meta charset="utf-8">
+	<title>Калькулятор</title>
+</head>
+<body>
+	<!-- поле ввода первого числа -->
+    введите первое число <br>
+	<input type="number" value="0" id="num1"/>
+
+	<!-- блок с кнопками -->
+	<div id="operator_btns">
+        <button id="plus" onclick="op='+'">+</button>
+        <button id="minus" onclick="op='-'">-</button>
+        <button id="times" onclick="op='*'">x</button>
+        <button id="divide" onclick="op='/'">:</button>
+	</div>
+
+	<!-- поле ввода второго числа -->
+    введите второе число <br>
+	<input type="number" value="0" id="num2" />
+	<br>
+
+	<!-- кнопка для рассчётов -->
+    <button onclick="func()">Посчитать</button><br>
+    результат<br>
+    <p id="result"></p>
+
+    <script>
+        // переменная, в которой хранится выбранное математическое действие
+        let op; 
+      
+        // функция расчёта
+        function func() {
+            // переменная для результата
+          let result;
+          // получаем первое и второе число
+          let num1 = Number(document.getElementById("num1").value);
+          let num2 = Number(document.getElementById("num2").value);
+          // смотрим, что было в переменной с действием, и действуем исходя из этого
+          switch (op) {
+            case '+':
+              result = num1 + num2;
+              break;
+            case '-':
+              result = num1 - num2;
+              break;
+            case '*':
+              result = num1 * num2;
+              break;
+            case '/':
+              result = num1 / num2;
+              break;
+          }
+          document.getElementById("result").innerHTML = result;
+        }
+
+      </script>
+</body>
+</html>
