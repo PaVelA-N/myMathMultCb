@@ -20,38 +20,20 @@
 					  c: [ "8", 7, [ 9, 0 ] ],
 					};
 
-		const obj_copy = structuredClone(obj);
+//		const obj_copy = structuredClone(obj);
+
+        const pow2 = function(arg1) {
+            const res = arg1*2;
+            return res;
+        }
 
 		let result = 0;
 
-		const newDeepCopy = JSON.parse(JSON.stringify(obj));
-	
-		// deepClone(obj) {
-		// 	if (typeof object(name)) {
-		// 		obj_copy = deppClone(obj{name})
-		// 	}
-		// 	if (array) {
-		// 		obj_copy = array.slice()
-		// 	}
-
-		// 	if (pritimitive) {
-
-		// 	}
-
-		// }
-//		for (let key in obj) {
-//			obj_copy[key] = obj[key];}
-
-	
-
-		function f_multiply(obj_m, z, callbackFN) {
+        function f_multiply(obj_m, z, callbackFN) {
 			const myObjCopy = JSON.parse(JSON.stringify(obj_m));
 
 			// В параметре функции f_multiply по имени callbackFN сдержится ТЕКСТ переданной функции
-			console.warn('cb', callbackFN); 
-			// console.log('cb result', callbackFN(3, 21));
 			console.log('cb result', callbackFN(3));
-			
 
 			for (let key in myObjCopy) {
 				switch (typeof myObjCopy[key]) {
@@ -68,23 +50,16 @@
 						myObjCopy[key]= myObjCopy[key];
 			      	break;	 
 			    	case 'object': 
-						// myObjCopy[key]= f_multiply(myObjCopy[key], z, 'myTEXT');
+						// в callbackFN передается ТЕКСТ функции
 						myObjCopy[key]= f_multiply(myObjCopy[key], z, callbackFN);
 			      	break;	 
 			    }
 		    };
-		    // if (control === 1) {
 			return myObjCopy;
 		};
 			
-			f_multiply(obj, xfactor, sum);
-			// f_multiply(obj, xfactor, pow2);
-
-			console.log('obj_copy');
-			for (let key in obj_copy) {
-				console.log(key, obj_copy[key]);
-			}
-
-			console.log(obj_copy);
+            const obj_copy = f_multiply(obj, xfactor, pow2);
+			console.log('obj_copy', obj_copy);
+            console.log('obj', obj);
 	</script>
 </html>
