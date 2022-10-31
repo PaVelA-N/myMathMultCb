@@ -44,7 +44,20 @@
         // });
         
         const Array1 = [5, 4, 3, 2, 1];
-        const powArray = Array1.map(x => x * x);
+        // const powArray = Array1.map(x => x * x);
+
+            // parseInt(strin, radix);
+
+            console.log('new changes');
+
+        const myArrFn = function(el, i, arr) {
+            console.log('this', this);
+            let res = el * 2;
+            if (res > 10) res = 10;
+            return res;
+        }
+
+        const powArray = Array1.map(myArrFn);
         console.log(powArray);
 
         const Array2 = ['a','b', 'c', 'd', 'e'];

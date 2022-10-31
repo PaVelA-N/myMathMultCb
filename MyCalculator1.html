@@ -30,14 +30,19 @@
     <script>
         // переменная, в которой хранится выбранное математическое действие
         let op; 
+
+
+        const myArr = [];
       
         // функция расчёта
-        function func() {
+        function func(num1, num2, op = "+") {
             // переменная для результата
           let result;
+          console.log('Operation type', op);
           // получаем первое и второе число
-          let num1 = Number(document.getElementById("num1").value);
-          let num2 = Number(document.getElementById("num2").value);
+        //   let num1 = Number(document.getElementById("num1").value);
+        //   let num2 = Number(document.getElementById("num2").value);
+            //hello
           // смотрим, что было в переменной с действием, и действуем исходя из этого
           switch (op) {
             case '+':
@@ -53,7 +58,9 @@
               result = num1 / num2;
               break;
           }
+          console.log(result);
           document.getElementById("result").innerHTML = result;
+          return result;
         }
 
       </script>
