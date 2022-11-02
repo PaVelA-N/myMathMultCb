@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="ru">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<meta name="theme-color" content="#000000">
+		<title>JS</title>
+		<style>
+		</style>
+        <title>Поиск в массиве</title>
+    </head>
+	<body id="body">
+        результат<br>
+        <p id="answer"></p>        
+	<script>
+// arr.indexOf(item, from) ищет item, начиная с индекса from, и возвращает индекс, на котором был найден искомый элемент, в противном случае -1.
+//arr.lastIndexOf(item, from) – то же самое, но ищет справа налево.
+//arr.includes(item, from) – ищет item, начиная с индекса from, и возвращает true, если поиск успешен  
+
+const n = 1000; // n - длина массива
+const bigList = Array.from(Array(n+1).keys()).slice(1); //bigList сгенерирует массив от 1 до N
+const searchItem = 691; //серч айтем - номер ячейки которую ищем 
+
+if (searchItem > n) {
+    alert( "Ошибка" );
+}
+
+let Select = '2';
+
+
+const MAX_TIME = 160; // constanta
+let maxTime = 160; // inner variable
+
+function switchTrain(number) {
+    switch (true) {
+        case (number < 5):
+            console.log('number < 5');
+            break;
+        case (number < 10):
+            console.log('number < 10');
+            break;
+        default:    
+            console.log('number');
+            break;
+    }
+}
+
+// number === true
+// (true) === true
+// number < 10 ==> ? true/false
+function SelectMethod(nF, arrF,searchItemF, SelectF) {
+    alert( nF );
+    let resultSM;
+    switch (SelectF) {
+        // case '1':
+        //     resultSM = arrF.indexOf(searchItemF);
+        //     alert( "закончился indexOf" );    
+        // break;
+        case 'rec': // рекурсия
+            resultSM = RecursionMethod (nF, arrF,searchItemF);    
+            alert( "закончилась рекурсия" );    
+        break;
+        case 'while': // While
+            resultSM = WhileMethod (nF, arrF,searchItemF);
+            alert( "закончился while" );    
+        break;
+        default:
+            resultSM = arrF.indexOf(searchItemF);
+            alert( "закончился indexOf" );  
+            break;
+    }
+    alert(resultSM);      
+    // console.log('result');
+    console.log(resultSM);
+//    document.getElementById("answer").innerHTML = resultSM;
+    return resultSM;
+}
+function WhileMethod(nFW, arrFW, searchItemFW){
+    let startW  = 0;
+    let endW = nFW-1;
+    let middleW = Math.floor(endW / 2);
+    let pointerW = arrFW[middleW];
+    let resultW;
+
+    while (pointerW != searchItemFW) {
+        if (pointerW > searchItemFW){
+            endW = middleW;
+            middleW = Math.floor(startW + (endW - startW)/ 2); 
+            pointerW = arrFW[middleW];
+        } else {
+            startW = middleW;
+            middleW = Math.floor(startW + (endW - startW)/ 2); 
+            pointerW = arrFW[middleW];
+        } 
+        // здесь проверка результата => return
+    }
+    if (pointerW=searchItemFW) {
+            resultW = pointerW;
+//            console.log(resultW);
+//            console.log(pointerW);
+            alert( "while получил результат" );    
+            return resultW;
+    }
+
+    // return false
+}
+function RecursionMethod(nFR, arrFR, searchItemFR){
+    let ArrFRinternal = Array.from(arrFR); 
+    let startR  = 0;
+    let endR = nFR-1;
+    let middleR = Math.floor(endR / 2);
+    let pointerR = ArrFRinternal[middleR];
+    let resultR;
+
+    if (pointerR != searchItemFR) {
+        if (pointerR > searchItemFR){
+            endR = middleR;
+            //newArrR = arrFRin.slice(0, arrFRin[endR+1]);
+            resultR = RecursionMethod(endR+1, ArrFRinternal.slice(0, endR+1), searchItemFR);
+        } else {
+            startR = middleR;
+            //newArrR = arrFRin.slice(arrFRin[startR]);
+            resultR = RecursionMethod(endR-startR, ArrFRinternal.slice(startR+1), searchItemFR);
+        } 
+    } else {
+        resultR = pointerR;
+        alert( "Recursion получил результат" );    
+        alert( resultR );    
+        return resultR;
+    }
+}
+
+    SelectMethod(n, bigList, searchItem, Select);
+    </script>
+
+    </body>
+</html>
