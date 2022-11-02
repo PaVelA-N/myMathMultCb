@@ -17,15 +17,15 @@
 //arr.lastIndexOf(item, from) – то же самое, но ищет справа налево.
 //arr.includes(item, from) – ищет item, начиная с индекса from, и возвращает true, если поиск успешен  
 
-const n = 1000; // n - длина массива
+const n = 10000000; // n - длина массива
 const bigList = Array.from(Array(n+1).keys()).slice(1); //bigList сгенерирует массив от 1 до N
 const searchItem = 691; //серч айтем - номер ячейки которую ищем 
 
 if (searchItem > n) {
-    alert( "Ошибка" );
+    // // alert( "Ошибка" );
 }
 
-let Select = '2';
+let Select = 'rec';
 
 
 const MAX_TIME = 160; // constanta
@@ -49,27 +49,27 @@ function switchTrain(number) {
 // (true) === true
 // number < 10 ==> ? true/false
 function SelectMethod(nF, arrF,searchItemF, SelectF) {
-    alert( nF );
+    // // alert( nF );
     let resultSM;
     switch (SelectF) {
         // case '1':
         //     resultSM = arrF.indexOf(searchItemF);
-        //     alert( "закончился indexOf" );    
+        //     // alert( "закончился indexOf" );    
         // break;
         case 'rec': // рекурсия
             resultSM = RecursionMethod (nF, arrF,searchItemF);    
-            alert( "закончилась рекурсия" );    
+            // // alert( "закончилась рекурсия" );    
         break;
         case 'while': // While
             resultSM = WhileMethod (nF, arrF,searchItemF);
-            alert( "закончился while" );    
+            // // alert( "закончился while" );    
         break;
         default:
             resultSM = arrF.indexOf(searchItemF);
-            alert( "закончился indexOf" );  
+            // // alert( "закончился indexOf" );  
             break;
     }
-    alert(resultSM);      
+    // // alert(resultSM);      
     // console.log('result');
     console.log(resultSM);
 //    document.getElementById("answer").innerHTML = resultSM;
@@ -98,7 +98,7 @@ function WhileMethod(nFW, arrFW, searchItemFW){
             resultW = pointerW;
 //            console.log(resultW);
 //            console.log(pointerW);
-            alert( "while получил результат" );    
+            // alert( "while получил результат" );    
             return resultW;
     }
 
@@ -112,25 +112,58 @@ function RecursionMethod(nFR, arrFR, searchItemFR){
     let pointerR = ArrFRinternal[middleR];
     let resultR;
 
+// [1.... 100]
+// return [1...50]
+
+    // [2,7];
+    // return 1 || 2
+    // TODO: разобраться с рекурсией
     if (pointerR != searchItemFR) {
         if (pointerR > searchItemFR){
             endR = middleR;
             //newArrR = arrFRin.slice(0, arrFRin[endR+1]);
-            resultR = RecursionMethod(endR+1, ArrFRinternal.slice(0, endR+1), searchItemFR);
+            return RecursionMethod(endR+1, ArrFRinternal.slice(0, endR+1), searchItemFR);
         } else {
             startR = middleR;
             //newArrR = arrFRin.slice(arrFRin[startR]);
-            resultR = RecursionMethod(endR-startR, ArrFRinternal.slice(startR+1), searchItemFR);
+            return RecursionMethod(endR-startR, ArrFRinternal.slice(startR+1), searchItemFR);
+            // result = undefined;
         } 
     } else {
         resultR = pointerR;
-        alert( "Recursion получил результат" );    
-        alert( resultR );    
+        // // alert( "Recursion получил результат" );    
+        // // alert( resultR );    
         return resultR;
     }
 }
 
     SelectMethod(n, bigList, searchItem, Select);
+    
+
+    const name = 'binary-Search-rec';
+    performance.mark('begin-' + name);
+    SelectMethod(n, bigList, searchItem, 'rec');
+    performance.mark('end-binary-Search-rec');
+
+    performance.measure('measure-binary-Search-rec','begin-binary-Search-rec', 'end-binary-Search-rec');
+    
+    performance.mark('begin-binary-Search-while');
+    SelectMethod(n, bigList, searchItem, 'while');
+    performance.mark('end-binary-Search-while');
+
+    performance.measure('measure-binary-Search-while','begin-binary-Search-while', 'end-binary-Search-while');
+   
+    performance.mark('begin-binary-Search-indexOF');
+    SelectMethod(n, bigList, searchItem);
+    performance.mark('end-binary-Search-indexOF');
+
+    performance.measure('measure-binary-Search-indexOF','begin-binary-Search-indexOF', 'end-binary-Search-indexOF');
+
+    // ...
+    console.log(performance.getEntriesByName('measure-binary-Search-rec'))
+    console.log(performance.getEntriesByName('measure-binary-Search-while'))
+    console.log(performance.getEntriesByName('measure-binary-Search-indexOF'))
+
     </script>
 
     </body>
