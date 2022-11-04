@@ -13,8 +13,8 @@
 	</body>
 	<script>
 
-const n_length = 8;
-const n_range = 10;
+const n_length = 4;
+const n_range = 15;
 const rnd = (min, max) => {
   min = Math.ceil(min);
   max = Math.floor(max);
@@ -30,8 +30,8 @@ for (let i=0;i<n_length;i++){
 }
 console.log(unsortedArr);
 
-let selectMetjod= 'by_insertion';
-//let selectMetjod= 'by_selection';
+//let selectMetjod= 'by_insertion';
+let selectMetjod= 'by_selection';
 
 switch (selectMetjod) {
 					case 'by_insertion': // включение
@@ -56,11 +56,14 @@ function sort_by_insertion(arrI){
         for (let i = 0; i < varLenth; i++){ 
             let temp = arrI[ i ], j = i-1;
                 while (j >= 0 && arrI[j] > temp) {
+                    console.log('(до) while i = ' + i + '; arrI[i] = ' + arrI[i] + '; j = ' + j + '; arrI[j] = ' + arrI[j] + '; temp = ' + temp + '; arr = '+ unsortedArr);
                      arrI[j+1] = arrI[j]; 
                      j--;
+                     console.log('(после) while i = ' + i + '; arrI[i] = ' + arrI[i] + '; j = ' + j + '; arrI[j] = ' + arrI[j] + '; temp = ' + temp + '; arr = '+ unsortedArr);
                     }
                 arrI[j+1] = temp;
-                console.log('включение i = ' + i + ' - ' + unsortedArr);
+                console.log('arrI[j+1] = temp;' + arrI[j+1] + '; j = ' + j);
+                console.log('результат i = ' + i + ' - ' + unsortedArr);
         }                    
     return arrI;    // На выходе сортированный по возрастанию массив
 }
