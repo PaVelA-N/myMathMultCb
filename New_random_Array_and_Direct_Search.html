@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<meta name="theme-color" content="#000000">
+		<title>JS</title>
+		<style>
+		</style>
+	</head>
+	<body id="body">
+		<div id='root'></div>
+	</body>
+	<script>
+
+const n_length = 8;
+const n_range = 10;
+const rnd = (min, max) => {
+  min = Math.ceil(min);
+  max = Math.floor(max);
+  let res = (Math.random()*(max-min+1));
+  //let res = (Math.random()*(max-min));
+  res = Math.floor(res) + min;
+  //res = Math.floor(res);
+  return res;
+};
+const unsortedArr = [];
+for (let i=0;i<n_length;i++){
+  unsortedArr.push(rnd(1,n_range));
+}
+console.log(unsortedArr);
+
+let selectMetjod= 'by_insertion';
+//let selectMetjod= 'by_selection';
+
+switch (selectMetjod) {
+					case 'by_insertion': // включение
+                        sort_by_insertion(unsortedArr);
+                        break;	
+
+                    case 'by_selection': // прямой выбор
+                        sort_by_selection(unsortedArr);
+                        break;	
+                    // case ('by_exchange'):// пузырек -максимум доводим до конца сравнивая попарно
+                    //     sort_by_exchange(unsortedArr);
+                    //     break;	
+                    default:
+                    unsortedArr.sort(function(a, b) { return a - b; });
+                        break;	
+}
+
+function sort_by_insertion(arrI){
+// На каждом шаге алгоритма сортировки вставками выбирается один из элементов входного массива 
+// и вставляется на нужную позицию в уже отсортированном массиве
+    let varLenth = arrI.length;
+        for (let i = 0; i < varLenth; i++){ 
+            let temp = arrI[ i ], j = i-1;
+                while (j >= 0 && arrI[j] > temp) {
+                     arrI[j+1] = arrI[j]; 
+                     j--;
+                    }
+                arrI[j+1] = temp;
+                console.log('включение i = ' + i + ' - ' + unsortedArr);
+        }                    
+    return arrI;    // На выходе сортированный по возрастанию массив
+}
+
+function sort_by_selection(arrS){ 
+//начинается с поиска наименьшего элемента в списке и обмена его с первым элементом
+    let varLenth = arrS.length;
+        for (let i = 0; i < varLenth-1; i++){ 
+            let min = i;
+            for (let j = i+1; j < varLenth; j++) { 
+                const isMinimum = arrS[j] < arrS[min];
+                if (isMinimum) min = j; 
+            } 
+            let temp = arrS[min]; 
+            arrS[min] = arrS[ i ];
+            arrS[ i ] = temp;
+            console.log('прямой выбор i = ' + i + ' - ' + unsortedArr);
+        }                    
+    return arrS;    // На выходе сортированный по возрастанию массив
+}
+
+function sort_by_exchange(arrE){
+    
+}
+
+console.log('отсортированный массив: ' + unsortedArr);
+
+	</script>
+</html>
