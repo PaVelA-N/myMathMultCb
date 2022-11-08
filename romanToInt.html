@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<meta name="theme-color" content="#000000">
+		<title>JS</title>
+		<style>
+		</style>
+	</head>
+	<body id="body">
+		<div id='root'></div>
+
+        <input type="text" name ="name1" id="inputRomanianNumberAsString" size="15" maxlength="16" value="MCMXCIV" />
+	</body>
+	<script>
+    s = document.getElementById('inputRomanianNumberAsString').value;
+    var romanToInt = function(s) {
+        var values = {I: 1, V: 5, X: 10, L: 50, C: 100, D: 500, M: 1000};
+        var digits = Object.keys(values);
+        let result=0;
+        let romanArray=s.split("");
+
+    for (let q=0; q<romanArray.length; ++q) {
+    if (digits.indexOf(romanArray[q]) < digits.indexOf(romanArray[q+1])) {
+      result -= values[romanArray[q]];
+    } else {
+        result += values[romanArray[q]];
+    }
+  }
+  return result;  
+};
+
+console.log(romanToInt(s));
+
+    </script>
+</html>

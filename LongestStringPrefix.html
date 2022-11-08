@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<meta name="theme-color" content="#000000">
+		<title>JS</title>
+		<style>
+		</style>
+	</head>
+	<body id="body">
+	</body>
+	<script>
+
+ /**
+ * @param {string[]} strs
+ * @return {string}
+ */
+
+//let strs =["flower", "flowar", "flowe", "flow", "flowdgfh", "flowa", "flowr", "flowera", "floweru"];
+let strs = ["flower","flow","flight"];
+
+var longestCommonPrefix = function(strs) {
+    let arrayLength = strs.length;
+
+    if (arrayLength===1) {
+        return result = strs[0];
+    } else {
+
+    let minStrLength =200;
+        
+        for (let i0 = 0; i0 < arrayLength; i0++) {
+            if (strs[i0].length < minStrLength) {
+                minStrLength = strs[i0].length;
+            }
+        }
+
+        strs.sort();
+        let longestPrefix = strs[0].split("");
+        console.log(longestPrefix);
+
+        for (let i=1; i<arrayLength; ++i) {
+
+            let nextStringArray=strs[i].split("");
+            let ii=0;
+
+            while ( (ii<minStrLength) && (longestPrefix[ii]===nextStringArray[ii])) {
+                 ii= ++ii;
+             }
+             if (ii<longestPrefix.length) {
+                 minStrLength = ii;
+                 longestPrefix = longestPrefix.slice(0, ii);
+             }; 
+        }
+        return result = longestPrefix.join('');  
+    }
+};
+
+console.log(longestCommonPrefix(strs));
+
+    </script>
+</html>
