@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<meta name="theme-color" content="#000000">
+		<title>JS</title>
+		<style>
+		</style>
+	</head>
+	<body id="body">
+		<div id='root'></div>
+        <p id="out_arr"></p>
+	</body>
+	<script>
+        // let worker = ['Петров', 'Иванов', 'Васильев', 'Яковлева', 'Степанова'];
+        // let paramOfOutput = [['users','name'],['users','sex'],['pets','type'],]; //TODO - дописать формат параметры вывода 
+        let paramOfOutput = [["users","Name"],["users","age"], ["users","sex"], ["pets","type"]];
+        // let users = [{ name: 'A', age: 1, sex: 'm' }, { name: 'BA', age: 51, sex: 'm' }, { name: 'VA', age: 41, sex: 'm' }, { name: 'DA', age: 31, sex: 'f' }, { name: 'NA', age: 21 , sex: 'f'}];
+        // let pets = [{ type: 'cat', name: 'cA', age: 1, sex: 'm' }, { type: 'dog', name: 'dBA', age: 51, sex: 'm' }, { type: 'cat', name: 'cVA', age: 41, sex: 'm' }, { type: 'dog',name: 'dDA', age: 31, sex: 'f' }, {type: 'cat', name: 'cNA', age: 21 , sex: 'f'}];
+        
+        let users = [{Name: 'A', age: 12, sex: 'm'}, { Name: 'BA', age: 51, sex: 'm'}];
+        let pets = [{ type: 'cat', petName: 'cA', age: 4, sex: 'm' }, { type: 'dog', petName: 'dBA', age: 3, sex: 'm' }];
+
+function returnElementAsStringToOutput (arrayNameStr, elementID, fieldNameStr){
+            let resultElementString = ' ';
+            let test1 = arrayNameStr[elementID];
+            let test2 = fieldNameStr + " = " + test1[fieldNameStr] + " , ";
+                resultElementString = test2;
+            return resultElementString;
+        };
+
+function dateOutput (){
+            let resultDateString = ' ';
+                for (let i = 0; i< users.length; i++  ) {
+                    resultDateString +=i + ') '
+                    let ii=0
+                        while (ii<paramOfOutput.length){
+                            let arrayName = paramOfOutput[ii][0];
+                            let fieldName = paramOfOutput[ii][1];
+                            let test="";
+switch (arrayName) {
+    case "users":
+      console.log(arrayName + " users");  
+        break;
+        case "pets":
+        console.log(arrayName + " pets");  
+        break;
+
+    default:
+        console.log("def");  
+        break;
+};
+                            if (arrayName === "users") {
+                                    test = returnElementAsStringToOutput(users, [i] ,fieldName); 
+                            }else {
+                                    test = returnElementAsStringToOutput(pets, [i] ,fieldName);                                    
+                                }
+                                resultDateString = resultDateString + test;
+                                ++ii; 
+                            }
+                            console.log(resultDateString);
+                resultDateString = resultDateString  + ";" + '<br>';
+                }
+    return resultDateString;
+};
+             
+   
+        // out_arr.innerHTML = returnElementAsStringToOutput(users, 0, 'uname');
+        out_arr.innerHTML = dateOutput();
+
+	</script>
+</html>

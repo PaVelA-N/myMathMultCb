@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<meta name="theme-color" content="#000000">
+		<title>JS</title>
+		<style>
+		</style>
+	</head>
+	<body id="body">
+		<div id='root'></div>
+	</body>
+	<script>
+        // const xfactor = 2;
+		const obj  = {
+					  a: { x: 1, y: 3 },
+					  b: null,
+					  c: [ "8", 7, [ 9, 0 ] ],
+                      d: [ "8", 7, { x1: 2, y1: 5 }, 'a'],
+                      e: [ "8", null, [ 9, 0 ] ],
+					};
+        let Obj_copy = {};
+        // Сергей Антонов, [10.10.2022 22:03]
+        // function xxx(cb) { for(let i = 0 ; i !== 10 ; ++i ) cb(i) }
+        // xxx((x) => console.log(x))
+        function deepCopyObject(objToCopy){
+            let inFunctionObj_copy={};
+            
+            for (let key in objToCopy) {
+                    switch (typeof objToCopy[key]) {
+                        case 'number': 
+                            inFunctionObj_copy[key]= objToCopy[key];
+                        break;	 
+                        case 'undefined': 
+                            inFunctionObj_copy[key]= 'undefined';			      		
+                        break;	 
+                        case 'boolean': 
+                            inFunctionObj_copy[key]= objToCopy[key];			      		
+                        break;	 
+                        case 'string': 
+                            inFunctionObj_copy[key]= objToCopy[key];
+                        break;	 
+                        case 'symbol': 
+                            inFunctionObj_copy[key]= objToCopy[key];			      		
+                        break;	 
+                        case 'object': 
+                            if (objToCopy[key] === null) {
+                                inFunctionObj_copy[key]= null;
+                            } else {
+                                if (objToCopy[key] instanceof Array){
+                                    inFunctionObj_copy[key]= deepCopyArray(objToCopy[key]);
+                                }
+                                else{
+                                    inFunctionObj_copy[key]= deepCopyObject(objToCopy[key]);
+                                }
+                            }
+                        break;	 
+                    }
+            };
+            return inFunctionObj_copy;
+        }
+        function deepCopyArray(arrToCopy){
+            let inFunctionArr_copy=[];
+            
+            for (let i=0; i < arrToCopy.length; i++) {
+                    switch (typeof arrToCopy[i]) {
+                        case 'number': 
+                            inFunctionArr_copy[i]= arrToCopy[i];
+                        break;	 
+                        case 'undefined': 
+                            inFunctionArr_copy[i]= 'undefined';			      		
+                        break;	 
+                        case 'boolean': 
+                            inFunctionArr_copy[i]= arrToCopy[i];			      		
+                        break;	 
+                        case 'string': 
+                            inFunctionArr_copy[i]= arrToCopy[i];
+                        break;	 
+                        case 'symbol': 
+                            inFunctionArr_copy[i]= arrToCopy[i];			      		
+                        break;	 
+                        case 'object': 
+                        if (arrToCopy[i] === null) {
+                                inFunctionArr_copy[i]= null;
+                            } else {
+                                if (arrToCopy[i] instanceof Array){
+                                    inFunctionArr_copy[i]= deepCopyArray(arrToCopy[i]);
+                                }
+                                else{
+                                    inFunctionArr_copy[i]= deepCopyObject(arrToCopy[i]);
+                                }
+                            }
+                        break;	 
+                    }
+            };
+            return inFunctionArr_copy;
+        }
+
+        Obj_copy = deepCopyObject(obj);
+
+        console.log('obj', obj);
+        console.log('Obj_copy', Obj_copy);
+    </script>
+</html>
