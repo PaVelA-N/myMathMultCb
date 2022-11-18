@@ -7,6 +7,13 @@
         </div>
     </body>
     <script>
+        // 2) сделать так чтобы часть полей в Персонах и Питомцах совпадала, а часть отличалась по имени и по формату
+        // совпадает age (numer) и sex (string)
+        // отличаются name и Pet nickname, есть уникальное поле typeOfAnimal
+        // в обьекте Person есть поле nickName для связки с массивом Pet
+        let personArray =[{name : 'Вася', age: 15, sex: 'male', nickName : 'Kitty' },{name : 'Петя', age: 16, sex: 'male', nickName : 'Rex' },{name : 'Оля', age: 12, sex: 'female', nickName : 'Star' },]; //Person name, age, sex, Pet nickname
+        let petArray =[{typeOfAnimal: 'cat', nickname : 'Kitty', age: 5, sex: 'female' }, {typeOfAnimal: 'dog', nickName : 'Rex', age: 3, sex: 'male' },{typeOfAnimal: 'cat', nickName : 'Star', age: 12, sex: 'female' }]; ////typeOfAnimal, Pet nickname, age, sex
+
         const Person = (person) => {
             return {
                 tag: 'div',
@@ -21,9 +28,18 @@
             return {
                 tag: 'div',
                 children: [
-                    
                     Age(pet.age),
-                    Name(pet.nickName),
+                    nickName("вывод через nickName: " + pet.nickname),
+                    Name("вывод через Name: " + pet.nickname),
+                ]
+            }
+        }
+
+        const Line = (line) => {
+            return {
+                tag: 'div',
+                children: [
+                    Stroka(line),
                 ]
             }
         }
@@ -32,23 +48,31 @@
             return {
                 tag: 'span',
                 text: name,
-                style: 'margin: 10px',
-            }
+                style: 'margin: 10px; background-color: lightgreen',
+             }
         }
 
-        // const nickName = (nickName) => {
-        //     return {
-        //         tag: 'span',
-        //         text: nickName,
-        //         style: 'margin: 30px',
-        //         color: 55,
-        //     }
-        // }
+        const nickName = (nickname) => {
+            return {
+                tag: 'span',
+                text: nickname,
+                style: 'margin: 20px; background-color: gold; color : red',
+            }
+        }
 
         const Age = (age) => {
             return {
                 tag: 'span',
                 text: age,
+            }
+        }
+        
+        let line = "разделитель двух способов вывода"
+
+        const Stroka = (line) => {
+            return {
+                tag: 'span',
+                text: "----------------------" + line + "----------------------",
             }
         }
 
@@ -70,14 +94,23 @@
             })
         }
 
-        render(
-            document.getElementById('root'),
-            Person({ name: 'Вася', age: 18 }),
-            Pet({  age: 7, nickName: 'Альма', }),
-            // Pet({ name: 'Альма', age: 7 }),
-        )
+        personArray.forEach((item, index, array) => {
+            render(
+                document.getElementById('root'),
+                Person({ name: personArray[index].name, age: personArray[index].age }),
 
+            )
+        })
 
+        render(document.getElementById('root'),Line (line))
+        
+        for (let i = 0; i < personArray.length; i++) {
+            render(
+                document.getElementById('root'),
+                    Person({ name: personArray[i].name, age: personArray[i].age }),
+                    Pet({  nickname: personArray[i].nickName, age: petArray[i].age  })
+            )
+        }
 
     </script>
 </html>
