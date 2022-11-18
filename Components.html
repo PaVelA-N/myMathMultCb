@@ -1,0 +1,83 @@
+<html>
+    <head>
+
+    </head>
+    <body>
+        <div id="root">
+        </div>
+    </body>
+    <script>
+        const Person = (person) => {
+            return {
+                tag: 'div',
+                children: [
+                    Name(person.name),
+                    Age(person.age)
+                ]
+            }
+        }
+
+        const Pet = (pet) => {
+            return {
+                tag: 'div',
+                children: [
+                    
+                    Age(pet.age),
+                    Name(pet.nickName),
+                ]
+            }
+        }
+
+        const Name = (name) => {
+            return {
+                tag: 'span',
+                text: name,
+                style: 'margin: 10px',
+            }
+        }
+
+        // const nickName = (nickName) => {
+        //     return {
+        //         tag: 'span',
+        //         text: nickName,
+        //         style: 'margin: 30px',
+        //         color: 55,
+        //     }
+        // }
+
+        const Age = (age) => {
+            return {
+                tag: 'span',
+                text: age,
+            }
+        }
+
+        const render = (root, ...virtual_DOM) => {
+            console.log(virtual_DOM)
+            virtual_DOM.forEach(node => {
+                const el = document.createElement(node.tag)
+                if( node.style ) {
+                    el.setAttribute('style', node.style)
+                }
+                if( node.text ) {
+                    const text_el = document.createTextNode(node.text)
+                    el.appendChild(text_el)
+                }
+                if( node.children ) {
+                    node.children.map(child => render(el, child))
+                }
+                root.appendChild(el)
+            })
+        }
+
+        render(
+            document.getElementById('root'),
+            Person({ name: 'Вася', age: 18 }),
+            Pet({  age: 7, nickName: 'Альма', }),
+            // Pet({ name: 'Альма', age: 7 }),
+        )
+
+
+
+    </script>
+</html>
