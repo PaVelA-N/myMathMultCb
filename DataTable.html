@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        table{
+            border-collapse: collapse;
+            border-spacing: 0;
+        }
+        th, td{
+            padding: 10px 20px;
+            border: 1px solid #000;
+        }
+    </style>
+
+</head>
+<style>
+    .alert {
+      padding: 15px;
+      border: 2px solid #d6e9c6;
+      border-radius: 5px;
+      color: #3c763d;
+      background-color: #dff0d8; 
+    }
+</style>
+<body id="body">
+    <div class="alert">
+        <strong>Внимание!</strong> персональные данные.
+      </div>
+</body>
+
+<script>
+    // let fields = 'fio,dr,spec,kurs'.split(',');
+    // for(let i = 0; i < fields.length; i ++)
+    // d.getElementById(fields[i]).value =    tr.querySelector("td [name='" + fields[i] + "']").textContent;
+
+
+    function tableCreate() {
+        const   body = document.body,
+                tbl = document.createElement('table');
+                    tbl.setAttribute('id','table1');
+                    tbl.style.width = '50%';
+                    tbl.style.border = '2px solid black';
+
+        for (i = 0; i < 3; i++) {
+            const tr = tbl.insertRow();
+            for (let j = 0; j < 3; j++) {
+            // if (i === 3 && j === 4) {
+            //     break;
+            // } else 
+            {
+                const td = tr.insertCell();
+
+                td.appendChild(document.createTextNode(`Cell I${i}/J${j}`));
+                td.style.border = '1px solid black';
+                // if (i === 4 && j === 1) {
+                // td.setAttribute('rowSpan', '4');
+                // }
+            }
+            }
+        }
+        body.appendChild(tbl);
+    }
+
+tableCreate();
+
+let personArray =[{name : 'Вася', age: 15, sex: 'male', address: 'Moscow', nickName : 'Kitty' },{name : 'Петя', age: 16, sex: 'male', address: 'Riga', nickName : 'Rex' },{name : 'Оля', age: 12, sex: 'female', address: 'Riga', nickName : 'Star' },]; //Person name, age, sex, Pet nickname
+let petArray =[{typeOfAnimal: 'cat', nickname : 'Kitty', age: 5, sex: 'female' }, {typeOfAnimal: 'dog', nickName : 'Rex', age: 3, sex: 'male' },{typeOfAnimal: 'cat', nickName : 'Star', age: 12, sex: 'female' }]; ////typeOfAnimal, Pet nickname, age, sex
+
+
+let t = document.getElementById("table1");
+let trs = t.getElementsByTagName("tr");
+let tds = null;
+
+for (i=0; i<trs.length; i++)
+{
+    tds = trs[i].getElementsByTagName("td");
+    for (var n=0; n<tds.length;n++)
+    {
+        tds[n].textContent = trs[i] + ' ;i=' + i + '---' +  tds + '; n=' + n;
+    }
+}
+
+
+// let tds = document.querySelectorAll('#table td');
+// for (let td of tds) {
+// 	td.textContent = '!';
+// }
+// (`Cell I${i}/J${j}`)
+// tbl.getElementById('Cell I1/J2').value = 1;
+        </script>  
+</html>
